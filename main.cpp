@@ -4,26 +4,34 @@
 #include <cmath>
 #include <iostream>
 #include <string>
+#include "algorithm.h"
+#include "calculations.h"
 
 #include <nlohmann/json.hpp>
 
-#define PI = 3.1415926535F
+#define PI 3.1415926535F
 #define DEG_TO_RAD (PI / 180.0F)
 
 using namespace std;
 using json = nlohmann::json;
 
-void poseHomeBot1(float positionX, float positionZ, float rotationY, unsigned homeBotNum)
+void poseHomeBots(Position_t homeBot1Pos, Position_t homeBot2Pos);
+
+void poseHomeBots(Position_t homeBot1Pos, Position_t homeBot2Pos)
 {
-    string homebot = "homeBot" + to_string(homeBotNum);
     json sampleMessage = {
         {"type", "set"},
         {"data",
          {{
-             homebot,
+             "homeBot1",
              {
-                 {"positionXZ", {positionX, positionZ}},
-                 {"rotationY", rotationY},
+                 {"positionXZ", {homeBot1Pos[X_POSITION], homeBot1Pos[Z_POSITION]}},
+                 {"rotationY", homeBot1Pos[ROTATION]},
+             }},
+         {   "homeBot2",
+             {
+                 {"positionXZ", {homeBot2Pos[X_POSITION], homeBot2Pos[Z_POSITION]}},
+                 {"rotationY", homeBot2Pos[ROTATION]},
              },
          }}},
     };
@@ -63,10 +71,16 @@ int main(int argc, char *argv[])
                 if (isRunning)
                 {
                     // Moves robot every two seconds
-                    if (time == 0)// -0.5, 0.3
-                        poseHomeBot1(0, 0, 0, 1);//135 * DEG_TO_RAD);
-                    else if (time == 40) // -0.1, 0.3
-                        poseHomeBot1(0, 0, 135, 1);//-135 * DEG_TO_RAD);
+                    if (time == 0)
+                        poseHomeBots(
+                            vector<float> { -0.3f, 0.0f, 90 * DEG_TO_RAD }, 
+                            vector<float>{ -0.5f, 0.3f, 0.0f}
+                        );
+                    else if (time == 40)
+                        poseHomeBots(
+                            vector<float>{0, 0, 90 * DEG_TO_RAD},
+                            vector<float>{-0.5f, 0.3f, 0.0f}
+                        );
                     time++;
                     if (time >= 80)
                         time = 0;
