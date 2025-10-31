@@ -1,5 +1,3 @@
-// EDACup example
-
 #include <exception>
 #include <cmath>
 #include <iostream>
@@ -15,32 +13,38 @@
 using namespace std;
 using json = nlohmann::json;
 
-void poseHomeBots(Position_t homeBot1Pos, Position_t homeBot2Pos);
+void poseHomeBots(HomeBot *homeBot1, HomeBot *homeBot2);
 
-void poseHomeBots(Position_t homeBot1Pos, Position_t homeBot2Pos)
+void poseHomeBots(HomeBot *homeBot1, HomeBot *homeBot2)
 {
+    Parameters_t bot1Pos = homeBot1->getPosition(), bot2Pos = homeBot2->getPosition();
+    Parameters_t bot1BallControl = homeBot1->getBallControl(), bot2BallControl = homeBot2->getBallControl();
+
     json sampleMessage = {
         {"type", "set"},
         {"data",
          {{
              "homeBot1",
              {
-                 {"positionXZ", {homeBot1Pos[X_POSITION], homeBot1Pos[Z_POSITION]}},
-                 {"rotationY", homeBot1Pos[ROTATION]},
+                 {"positionXZ", {bot1Pos[X_POSITION], bot1Pos[Z_POSITION]}},
+                 {"rotationY", bot1Pos[ROTATION]},
+                 {"dribbler", bot1BallControl[DRIBBLER]},
+                 {"kick", bot1BallControl[KICK]},
+                 {"chirp", bot1BallControl[CHIRP]}
              }},
          {   "homeBot2",
              {
-                 {"positionXZ", {homeBot2Pos[X_POSITION], homeBot2Pos[Z_POSITION]}},
-                 {"rotationY", homeBot2Pos[ROTATION]},
+                 {"positionXZ", {bot2Pos[X_POSITION], bot2Pos[Z_POSITION]}},
+                 {"rotationY", bot2Pos[ROTATION]},
+                 {"dribbler", bot2BallControl[DRIBBLER]},
+                 {"kick", bot2BallControl[KICK]},
+                 {"chirp", bot2BallControl[CHIRP]}
              },
          }}},
     };
 
-    // cout connects to server
     cout << sampleMessage.dump() << endl;
 
-    // cerr prints to debug console
-    //cerr << "Updated homeBot1 pose." << endl;
     cerr << sampleMessage.dump(4) << endl;
 }
 
@@ -49,18 +53,17 @@ int main(int argc, char *argv[])
     bool isRunning = false;
     uint32_t time = 0;
 
+    HomeBot *homeBot1 = new HomeBot(-0.645f, 0.39f, 0.0f);
+    HomeBot *homeBot2 = new HomeBot(-0.645f, -0.39f, 0.0f);
+
     while (true)
     {
-        // Try-catch allows intercepting errors.
-        // On error, the catch block is executed.
         try
         {
             string line;
             getline(cin, line);
 
             json message = json::parse(line);
-            //cerr << "+Received data:" << endl;
-            //cerr << message.dump(4) << endl;
             string type = message["type"];
             if (type == "start")
                 isRunning = true;
@@ -72,25 +75,30 @@ int main(int argc, char *argv[])
                 {
                     // Moves robot every two seconds
                     if (time == 0)
-                        poseHomeBots(
-                            vector<float> { -0.3f, 0.0f, 90 * DEG_TO_RAD }, 
-                            vector<float>{ -0.5f, 0.3f, 0.0f}
-                        );
+                    {
+                        homeBot1->setPosition(-0.645f, 0.39f, 90 * DEG_TO_RAD);
+                        homeBot2->setPosition(-0.645f, -0.39f, 0.0f);
+                    }   
                     else if (time == 40)
-                        poseHomeBots(
-                            vector<float>{0, 0, 90 * DEG_TO_RAD},
-                            vector<float>{-0.5f, 0.3f, 0.0f}
-                        );
+                    {
+                        homeBot1->setPosition(0, 0, 110 * DEG_TO_RAD);
+                        // dribbler
+                        homeBot1->setBallControl(1, 0, 0);
+                    }
+
                     time++;
                     if (time >= 80)
                         time = 0;
+
+                    poseHomeBots(homeBot1, homeBot2);
                 }
             }
         }
         catch (exception &error)
         {
-            // cerr prints to debug console
             cerr << error.what() << endl;
         }
     }
+
+    delete homeBot1, homeBot2;
 }
