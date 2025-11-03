@@ -30,7 +30,7 @@ typedef struct {
     float dribbler;
     float kicker;
     float chipper;
-};
+} Actions;
 
 typedef struct GameState {
     Bot rivalBot1;
