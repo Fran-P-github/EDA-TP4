@@ -2,7 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <string>
-#include "algorithm.h"
+#include "game.h"
 #include "calculations.h"
 
 #include <nlohmann/json.hpp>
@@ -17,8 +17,10 @@ void poseHomeBots(HomeBot *homeBot1, HomeBot *homeBot2);
 
 void poseHomeBots(HomeBot *homeBot1, HomeBot *homeBot2)
 {
-    Parameters_t bot1Pos = homeBot1->getPosition(), bot2Pos = homeBot2->getPosition();
-    Parameters_t bot1BallControl = homeBot1->getBallControl(), bot2BallControl = homeBot2->getBallControl();
+    Coords bot1Pos = homeBot1->getPosition(), bot2Pos = homeBot2->getPosition();
+    float rot1 = homeBot1->getRotation().rotY;
+    float rot2 = homeBot2->getRotation().rotY;
+    Actions bot1BallControl = homeBot1->getBallControl(), bot2BallControl = homeBot2->getBallControl();
 
     json sampleMessage = {
         {"type", "set"},
@@ -26,19 +28,19 @@ void poseHomeBots(HomeBot *homeBot1, HomeBot *homeBot2)
          {{
              "homeBot1",
              {
-                 {"positionXZ", {bot1Pos[X_POSITION], bot1Pos[Z_POSITION]}},
-                 {"rotationY", bot1Pos[ROTATION]},
-                 {"dribbler", bot1BallControl[DRIBBLER]},
-                 {"kick", bot1BallControl[KICK]},
-                 {"chirp", bot1BallControl[CHIRP]}
+                 {"positionXZ", {bot1Pos.x, bot1Pos.z}},
+                 {"rotationY", rot1},
+                 {"dribbler", bot1BallControl.dribbler},
+                 {"kick", bot1BallControl.kicker},
+                 {"chirp", bot1BallControl.chipper}
              }},
          {   "homeBot2",
              {
-                 {"positionXZ", {bot2Pos[X_POSITION], bot2Pos[Z_POSITION]}},
-                 {"rotationY", bot2Pos[ROTATION]},
-                 {"dribbler", bot2BallControl[DRIBBLER]},
-                 {"kick", bot2BallControl[KICK]},
-                 {"chirp", bot2BallControl[CHIRP]}
+                 {"positionXZ", {bot2Pos.x, bot2Pos.z}},
+                 {"rotationY", rot2},
+                 {"dribbler", bot2BallControl.dribbler},
+                 {"kick", bot2BallControl.kicker},
+                 {"chirp", bot2BallControl.chipper }
              },
          }}},
     };
