@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 
 typedef std::vector<float> Parameters_t;
