@@ -2,31 +2,31 @@
 
 #include <vector>
 
-typedef struct Coords {
+typedef struct {
     float x;
     float y;
     float z;
-};
+} Coords;
 
-typedef struct Rotation {
+typedef struct {
     float rotX;
     float rotY;
     float rotZ;
-};
+} Rotation;
 
-typedef struct Velocity {
+typedef struct {
     float vx;
     float vy;
     float vz;
-};
+} Velocity;
 
-typedef struct AngularVelocity {
+typedef struct {
     float avX;
     float avY;
     float avZ;
-};
+} AngularVelocity;
 
-typedef struct Actions {
+typedef struct {
     float dribbler;
     float kicker;
     float chipper;

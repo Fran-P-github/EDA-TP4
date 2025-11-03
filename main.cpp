@@ -7,9 +7,6 @@
 #include "comm.h"
 #include <nlohmann/json.hpp>
 
-#define PI 3.1415926535F
-#define DEG_TO_RAD (PI / 180.0F)
-
 using namespace std;
 using json = nlohmann::json;
 
@@ -36,20 +33,15 @@ int main(int argc, char *argv[])
             bool mustReply = comm.updateGame(game);
             if (game.playing && mustReply)
             {
-                // Moves robot every two seconds
-                if (time == 0)
+                if (isRunning)
                 {
-                    // fill in
-                }   
-                else if (game.time == 40)
-                {
-                    // fill in
+                    /*Coords currentPos = homeBot1->getPosition();
+                    Coords currentPos2 = homeBot2->getPosition();
+                    float angle = getAngle(currentPos, homeBot2->getPosition());
+                    homeBot1->setPosition(currentPos.x, currentPos.z, angle);
+                    homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
+                    poseHomeBots(homeBot1, homeBot2);*/
                 }
-
-                game.time++;
-                if (game.time >= 80)
-                    game.time = 0;
-                comm.poseHomeBots(game.homeBot1, game.homeBot2);
             }
         }
         catch (exception &error)
