@@ -34,13 +34,14 @@ typedef struct Actions {
 
 typedef struct GameState {
     Bot rivalBot1;
-    Bot rivalBot1;
+    Bot rivalBot2;
     HomeBot homeBot1;
     HomeBot homeBot2;
     Ball ball;
     unsigned homeScore;
     unsigned rivalScore;
     bool playing;
+    uint32_t time;
 };
 
 class Entity {
@@ -50,6 +51,10 @@ public:
     Velocity getVelocity();
     Rotation getRotation();
     AngularVelocity getAV();
+    void setPosition(Coords newCoords);
+    void setVelocity(Velocity newVelocity);
+    void setRotation(Rotation newRoation);
+    void setAV(AngularVelocity newAV);
 protected:
     Coords coords;
     Velocity velocity;
@@ -74,7 +79,6 @@ public:
     HomeBot(float xInitial, float zInitial, float InitialRot);
     Actions getBallControl();
     void setBallControl(float dribblerValue, float kickValue, float chirpValue);
-    void setPosition(float xValue, float zValue, float rotationValue);
 
 private:
     Actions actions;
