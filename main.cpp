@@ -33,15 +33,12 @@ int main(int argc, char *argv[])
             bool mustReply = comm.updateGame(game);
             if (game.playing && mustReply)
             {
-                if (isRunning)
-                {
-                    /*Coords currentPos = homeBot1->getPosition();
-                    Coords currentPos2 = homeBot2->getPosition();
-                    float angle = getAngle(currentPos, homeBot2->getPosition());
-                    homeBot1->setPosition(currentPos.x, currentPos.z, angle);
-                    homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
-                    poseHomeBots(homeBot1, homeBot2);*/
-                }
+                /*Coords currentPos = homeBot1->getPosition();
+                Coords currentPos2 = homeBot2->getPosition();
+                float angle = getAngle(currentPos, homeBot2->getPosition());
+                homeBot1->setPosition(currentPos.x, currentPos.z, angle);
+                homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
+                poseHomeBots(homeBot1, homeBot2);*/
             }
         }
         catch (exception &error)
