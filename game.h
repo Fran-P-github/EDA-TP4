@@ -2,52 +2,35 @@
 
 #include <vector>
 
-typedef struct Coords {
+typedef struct {
     float x;
     float y;
     float z;
-};
+} Coords;
 
-typedef struct Rotation {
+typedef struct {
     float rotX;
     float rotY;
     float rotZ;
-};
+} Rotation;
 
-typedef struct Velocity {
+typedef struct {
     float vx;
     float vy;
     float vz;
-};
+} Velocity;
 
-typedef struct AngularVelocity {
+typedef struct {
     float avX;
     float avY;
     float avZ;
-};
+} AngularVelocity;
 
-typedef struct Actions {
+typedef struct {
     float dribbler;
     float kicker;
     float chipper;
-};
-
-typedef struct GameState {
-    Bot rivalBot1;
-    Bot rivalBot1;
-    HomeBot homeBot1;
-    HomeBot homeBot2;
-    Ball ball;
-    unsigned homeScore;
-    unsigned rivalScore;
-    bool playing;
-};
-
-class Ball : public Entity {
-public:
-    Ball()
-        : Entity(Coords{ 0, 0, 0 }, Velocity{ 0, 0, 0 }, Rotation{ 0, 0, 0 }, AngularVelocity{ 0, 0, 0 }){}
-};
+} Actions;
 
 class Entity {
 public:
@@ -70,6 +53,13 @@ protected:
     Velocity velocity;
     Rotation rotation;
     AngularVelocity av;
+};
+
+class Ball : public Entity {
+public:
+    Ball()
+        : Entity(Coords{ 0, 0, 0 }, Velocity{ 0, 0, 0 }, Rotation{ 0, 0, 0 }, AngularVelocity{ 0, 0, 0 }) {
+    }
 };
 
 class Bot : public Entity {
@@ -104,3 +94,14 @@ public:
 private:
     Actions actions;
 };
+
+typedef struct {
+    Bot rivalBot1;
+    Bot rivalBot2;
+    HomeBot homeBot1;
+    HomeBot homeBot2;
+    Ball ball;
+    unsigned homeScore;
+    unsigned rivalScore;
+    bool playing;
+} GameState;

@@ -7,9 +7,6 @@
 
 #include <nlohmann/json.hpp>
 
-#define PI 3.1415926535F
-#define DEG_TO_RAD (PI / 180.0F)
-
 using namespace std;
 using json = nlohmann::json;
 
@@ -54,7 +51,7 @@ int main(int argc, char *argv[])
 {
     bool isRunning = false;
     uint32_t time = 0;
-
+    float position = -0.645f;
     HomeBot *homeBot1 = new HomeBot(-0.645f, 0.39f, 0.0f);
     HomeBot *homeBot2 = new HomeBot(-0.645f, -0.39f, 0.0f);
 
@@ -75,24 +72,12 @@ int main(int argc, char *argv[])
             {
                 if (isRunning)
                 {
-                    // Moves robot every two seconds
-                    if (time == 0)
-                    {
-                        homeBot1->setPosition(-0.645f, 0.39f, 90 * DEG_TO_RAD);
-                        homeBot2->setPosition(-0.645f, -0.39f, 0.0f);
-                    }   
-                    else if (time == 40)
-                    {
-                        homeBot1->setPosition(0, 0, 110 * DEG_TO_RAD);
-                        // dribbler
-                        homeBot1->setBallControl(1, 0, 0);
-                    }
-
-                    time++;
-                    if (time >= 80)
-                        time = 0;
-
-                    poseHomeBots(homeBot1, homeBot2);
+                    /*Coords currentPos = homeBot1->getPosition();
+                    Coords currentPos2 = homeBot2->getPosition();
+                    float angle = getAngle(currentPos, homeBot2->getPosition());
+                    homeBot1->setPosition(currentPos.x, currentPos.z, angle);
+                    homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
+                    poseHomeBots(homeBot1, homeBot2);*/
                 }
             }
         }

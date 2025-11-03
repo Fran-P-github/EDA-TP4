@@ -7,7 +7,10 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
 find_package(nlohmann_json CONFIG REQUIRED)
 
-file(GLOB SAMPLE_SOURCE "*.cpp")
+#file(GLOB SAMPLE_SOURCE "*.cpp")
 
-add_executable(move_sample ${SAMPLE_SOURCE})
+add_executable(move_sample #${SAMPLE_SOURCE}
+	main.cpp
+	calculations.cpp
+)
 target_link_libraries(move_sample PRIVATE nlohmann_json::nlohmann_json)
