@@ -12,5 +12,7 @@ find_package(nlohmann_json CONFIG REQUIRED)
 add_executable(move_sample #${SAMPLE_SOURCE}
 	main.cpp
 	calculations.cpp
+	game.cpp
+	comm.cpp
 )
 target_link_libraries(move_sample PRIVATE nlohmann_json::nlohmann_json)

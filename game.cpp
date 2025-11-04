@@ -1,5 +1,4 @@
 #include "game.h"
-#include "game.h"
 
 Entity::Entity(Coords initCoords, Velocity initVelocity, Rotation initRot, AngularVelocity initAV)
 	: coords(initCoords), velocity(initVelocity), rotation(initRot), av(initAV) {}

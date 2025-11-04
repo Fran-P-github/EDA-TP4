@@ -1,6 +1,6 @@
 #pragma once
 
-#include <vector>
+#include <stdint.h>
 
 typedef struct {
     float x;
@@ -31,18 +31,6 @@ typedef struct {
     float kicker;
     float chipper;
 } Actions;
-
-typedef struct GameState {
-    Bot rivalBot1;
-    Bot rivalBot2;
-    HomeBot homeBot1;
-    HomeBot homeBot2;
-    Ball ball;
-    unsigned homeScore;
-    unsigned rivalScore;
-    bool playing;
-    uint32_t time;
-};
 
 class Entity {
 public:
@@ -83,3 +71,15 @@ public:
 private:
     Actions actions;
 };
+
+typedef struct {
+    RivalBot rivalBot1;
+    RivalBot rivalBot2;
+    HomeBot homeBot1;
+    HomeBot homeBot2;
+    Ball ball;
+    unsigned homeScore;
+    unsigned rivalScore;
+    bool playing;
+    uint32_t time;
+} GameState;

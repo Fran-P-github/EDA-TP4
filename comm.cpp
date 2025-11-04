@@ -1,18 +1,16 @@
 #include "comm.h"
 #include <iostream>
 #include <nlohmann/json.hpp>
-#define PI 3.1415926535F
-#define DEG_TO_RAD (PI / 180.0F)
 
 using namespace std;
 using json = nlohmann::json;
 
-void poseHomeBots(HomeBot &homeBot1, HomeBot &homeBot2)
+void Comm::poseHomeBots(HomeBot &homeBot1, HomeBot &homeBot2)
 {
-    Coords bot1Pos = homeBot1->getPosition(), bot2Pos = homeBot2->getPosition();
-    float rot1 = homeBot1->getRotation().rotY;
-    float rot2 = homeBot2->getRotation().rotY;
-    Actions bot1BallControl = homeBot1->getBallControl(), bot2BallControl = homeBot2->getBallControl();
+    Coords bot1Pos = homeBot1.getPosition(), bot2Pos = homeBot2.getPosition();
+    float rot1 = homeBot1.getRotation().rotY;
+    float rot2 = homeBot2.getRotation().rotY;
+    Actions bot1BallControl = homeBot1.getBallControl(), bot2BallControl = homeBot2.getBallControl();
 
     json sampleMessage = {
         {"type", "set"},
@@ -42,7 +40,7 @@ void poseHomeBots(HomeBot &homeBot1, HomeBot &homeBot2)
     cerr << sampleMessage.dump(4) << endl;
 }
 
-bool updateGame(GameState &game) {
+bool Comm::updateGame(GameState &game) {
     string line;
     getline(cin, line);
     bool mustReply = false;
@@ -50,7 +48,7 @@ bool updateGame(GameState &game) {
     string type = message["type"];
     if (type == "start") {
         game.playing = true;
-        mustReply = false
+        mustReply = false;
     }
     else if (type == "stop") {
         game.playing = false;

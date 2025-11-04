@@ -1,14 +1,11 @@
 #include <exception>
-#include <cmath>
 #include <iostream>
 #include <string>
 #include "game.h"
 #include "calculations.h"
 #include "comm.h"
-#include <nlohmann/json.hpp>
 
 using namespace std;
-using json = nlohmann::json;
 
 int main(int argc, char *argv[])
 {
