@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
         .ball = Ball(),
         .homeScore = 0,
         .rivalScore = 0,
-        .playing = false,
+        .status = STOPPED,
         .time = 0,
     };
 

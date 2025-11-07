@@ -47,11 +47,11 @@ bool Comm::updateGame(GameState &game) {
     json message = json::parse(line);
     string type = message["type"];
     if (type == "start") {
-        game.playing = true;
+        game.status = PLAYING;
         mustReply = false;
     }
     else if (type == "stop") {
-        game.playing = false;
+        game.status = STOPPED;
         mustReply = false;
     }
     else if (type == "state") {
