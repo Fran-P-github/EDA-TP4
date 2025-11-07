@@ -7,3 +7,5 @@
 #define ABS(x) ((x) >= 0 ? (x) : -(x))
 
 float getAngle(Coords origin, Coords destiny);
+int proximityCheck(Coords origin, Coords destiny, float threshold);
+int offLimitsCheck(Coords position, float xMin, float xMax, float yMin, float yMax); //cambiar cuando hardcodeemos los limites de la cancha

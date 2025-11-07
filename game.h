@@ -72,6 +72,13 @@ private:
     Actions actions;
 };
 
+typedef enum {
+    PLAYING,
+    STOPPED,
+    FOUL,
+    RESET
+} GameStatus;
+
 typedef struct {
     RivalBot rivalBot1;
     RivalBot rivalBot2;
@@ -80,6 +87,7 @@ typedef struct {
     Ball ball;
     unsigned homeScore;
     unsigned rivalScore;
-    bool playing;
+    GameStatus status;
     uint32_t time;
 } GameState;
+
