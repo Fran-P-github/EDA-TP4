@@ -10,3 +10,5 @@ float getAngle(Coords origin, Coords destiny);
 int proximityCheck(Coords origin, Coords destiny, float threshold);
 int offLimitsCheck(Coords position);
 float defenderXCord(Coords position, Coords ball);
+
+bool hasBall(Bot bot, Ball ball);

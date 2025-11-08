@@ -11,3 +11,5 @@
 #define maxHeight 0.75F
 #define centreX 0.0F
 #define centreY 0.0F
+
+#define DEFENDER_CIRCLE_RADIUS 42

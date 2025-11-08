@@ -5,7 +5,7 @@
 
 
 
- float xMin = -FIELD_WIDTH/2, float xMax = FIELD_WIDTH/2, float yMin = -FIELD_LENGTH/2, float yMax = FIELD_LENGTH/2;
+float xMin = -FIELD_WIDTH/2, float xMax = FIELD_WIDTH/2, float yMin = -FIELD_LENGTH/2, float yMax = FIELD_LENGTH/2;
 
 float getAngle(Coords origin, Coords destiny) {
 	float dx = destiny.z - origin.z; // Tomando el tablero como un plano con el eje X horizontal
