@@ -59,7 +59,7 @@ public:
     Velocity getVelocity();
     Rotation getRotation();
     AngularVelocity getAV();
-    void setPosition(Coords newCoords) { this->coords = newCoords; }
+    void setPosition(Coords newCoords);
     void setVelocity(Velocity newVelocity);
     void setRotation(Rotation newRoation);
     void setAV(AngularVelocity newAV);
@@ -86,7 +86,7 @@ class HomeBot : public Bot {
 public:
     HomeBot(float xInitial, float zInitial, float InitialRot);
     Actions getBallControl();
-    void setBallControl(float dribblerValue, float kickValue, float chirpValue);
+    void setBallControl(Actions newActions);
     BotRole getRole();
     void setRole(BotRole newRole);
 

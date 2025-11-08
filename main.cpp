@@ -42,7 +42,7 @@ int main(int argc, char *argv[])
                             game.homeBot1.setRotation({ newRot.rotX, angle, newRot.rotZ });
                             game.homeBot2.setPosition({ currentPos2.x + .1f, currentPos2.y, currentPos2.z });
                             
-                            comm.poseHomeBots(game.homeBot1, game.homeBot2);
+                            //comm.poseHomeBots(game.homeBot1, game.homeBot2);
                         }
                     break;
                 case STOPPED:

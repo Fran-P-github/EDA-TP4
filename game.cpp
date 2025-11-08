@@ -17,19 +17,19 @@ AngularVelocity Entity::getAV() {
 }
 
 void Entity::setPosition(Coords newCoords) {
-    this->coords = newCoords;
+    coords = newCoords;
 }
 
 void Entity::setVelocity(Velocity newVelocity) {
-    this->velocity = newVelocity;
+    velocity = newVelocity;
 }
 
 void Entity::setRotation(Rotation newRotation) {
-    this->rotation = newRotation;
+    rotation = newRotation;
 }
 
 void Entity::setAV(AngularVelocity newAV) {
-    this->av = newAV;
+    av = newAV;
 }
 
 Ball::Ball() : Entity(Coords{ 0, 0, 0 }, Velocity{ 0, 0, 0 }, Rotation{ 0, 0, 0 }, AngularVelocity{ 0, 0, 0 }) {}
@@ -44,10 +44,8 @@ Actions HomeBot::getBallControl() {
     return actions;
 }
 
-void HomeBot::setBallControl(float dribblerValue, float kickValue, float chirpValue) {
-    actions.dribbler = dribblerValue;
-    actions.kicker = kickValue;
-    actions.chipper = chirpValue;
+void HomeBot::setBallControl(Actions newActions) {
+    actions = newActions;
 }
 
 BotRole HomeBot::getRole() {
