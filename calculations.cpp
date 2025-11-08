@@ -1,6 +1,11 @@
 #include "calculations.h"
 #include <cmath>
 #include <iostream>
+#include "config.h"
+
+
+
+ float xMin = -FIELD_WIDTH/2, float xMax = FIELD_WIDTH/2, float yMin = -FIELD_LENGTH/2, float yMax = FIELD_LENGTH/2;
 
 float getAngle(Coords origin, Coords destiny) {
 	float dx = destiny.z - origin.z; // Tomando el tablero como un plano con el eje X horizontal
@@ -23,8 +28,8 @@ int proximityCheck(Coords origin, Coords destiny, float threshold) {
 	}
 }
 
-int offLimitsCheck(Coords position, float xMin, float xMax, float yMin, float yMax) {
-	if (position.x < xMin || position.x > xMax || position.y < yMin || position.y > yMax) {
+int offLimitsCheck(Coords position) {
+	if (position.x < xMin || position.x > xMax || position.y < yMin || position.y > yMax || ABS(position.z) > maxHeight) {
 		return 1;
 	}
 	else {
@@ -32,4 +37,9 @@ int offLimitsCheck(Coords position, float xMin, float xMax, float yMin, float yM
 	}
 }
 
+float defenderXCord(Coords position, Coords ball) {
+	float defenderX;
+	defenderX = (centreX + ball.x) / 2.0F;
+	return defenderX;
+}
 
