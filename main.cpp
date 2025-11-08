@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
                             homeBot1->setPosition(currentPos.x, currentPos.z, angle);
                             homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
                             poseHomeBots(homeBot1, homeBot2);*/
+                            
                         }
                     break;
                 case STOPPED:

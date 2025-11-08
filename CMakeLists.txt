@@ -14,5 +14,6 @@ add_executable(move_sample #${SAMPLE_SOURCE}
 	calculations.cpp
 	game.cpp
 	comm.cpp
+	algorithm.cpp
 )
 target_link_libraries(move_sample PRIVATE nlohmann_json::nlohmann_json)

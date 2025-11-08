@@ -1,36 +1,32 @@
 #include "comm.h"
+#include "algorithm.h"
 #include <iostream>
 #include <nlohmann/json.hpp>
 
 using namespace std;
 using json = nlohmann::json;
 
-void Comm::poseHomeBots(HomeBot &homeBot1, HomeBot &homeBot2)
+void Comm::poseHomeBots(HomeBotPlan &hb1Plan, HomeBotPlan &hb2Plan)
 {
-    Coords bot1Pos = homeBot1.getPosition(), bot2Pos = homeBot2.getPosition();
-    float rot1 = homeBot1.getRotation().rotY;
-    float rot2 = homeBot2.getRotation().rotY;
-    Actions bot1BallControl = homeBot1.getBallControl(), bot2BallControl = homeBot2.getBallControl();
-
     json sampleMessage = {
         {"type", "set"},
         {"data",
          {{
              "homeBot1",
              {
-                 {"positionXZ", {bot1Pos.x, bot1Pos.z}},
-                 {"rotationY", rot1},
-                 {"dribbler", bot1BallControl.dribbler},
-                 {"kick", bot1BallControl.kicker},
-                 {"chirp", bot1BallControl.chipper}
+                 {"positionXZ", {hb1Plan.posXZ.x, hb1Plan.posXZ.z}},
+                 {"rotationY", hb1Plan.rotY},
+                 {"dribbler", hb1Plan.actions.dribbler},
+                 {"kick", hb1Plan.actions.kicker},
+                 {"chirp", hb1Plan.actions.chipper}
              }},
          {   "homeBot2",
              {
-                 {"positionXZ", {bot2Pos.x, bot2Pos.z}},
-                 {"rotationY", rot2},
-                 {"dribbler", bot2BallControl.dribbler},
-                 {"kick", bot2BallControl.kicker},
-                 {"chirp", bot2BallControl.chipper }
+                 {"positionXZ", {hb2Plan.posXZ.x, hb2Plan.posXZ.z}},
+                 {"rotationY", hb2Plan.rotY},
+                 {"dribbler", hb2Plan.actions.dribbler},
+                 {"kick", hb2Plan.actions.kicker},
+                 {"chirp", hb2Plan.actions.chipper }
              },
          }}},
     };
@@ -146,7 +142,10 @@ bool Comm::updateGame(GameState &game) {
             (float)ball_data["angularVelocity"][0],
             (float)ball_data["angularVelocity"][1],
             (float)ball_data["angularVelocity"][2] });
-
+        TeamPlan plan = computeTeamPlan(game);
+        HomeBotPlan hb1Plan = plan.hb1Plan;
+        HomeBotPlan hb2Plan = plan.hb2Plan;
+        poseHomeBots(hb1Plan, hb2Plan);
         mustReply = true;
     }
     return mustReply;

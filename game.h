@@ -32,6 +32,26 @@ typedef struct {
     float chipper;
 } Actions;
 
+typedef struct {
+    struct {
+        float x;
+        float z;
+    } posXZ;
+    float rotY;
+    Actions actions;
+} HomeBotPlan;
+
+typedef struct {
+    HomeBotPlan hb1Plan;
+    HomeBotPlan hb2Plan;
+} TeamPlan;
+
+enum class BotRole {
+    ATTACKER,
+    DEFENDER,
+    NONE
+};
+
 class Entity {
 public:
     Entity(Coords initCoords, Velocity initVelocity, Rotation initRot, AngularVelocity initAV);
@@ -67,9 +87,12 @@ public:
     HomeBot(float xInitial, float zInitial, float InitialRot);
     Actions getBallControl();
     void setBallControl(float dribblerValue, float kickValue, float chirpValue);
+    BotRole getRole();
+    void setRole(BotRole newRole);
 
 private:
     Actions actions;
+    BotRole role;
 };
 
 typedef enum {

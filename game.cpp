@@ -45,7 +45,8 @@ Ball::Ball() : Entity(Coords{ 0, 0, 0 }, Velocity{ 0, 0, 0 }, Rotation{ 0, 0, 0 
 Bot::Bot(float xInitial, float zInitial, float InitialRot)
     : Entity(Coords{ xInitial, 0, zInitial }, Velocity{ 0, 0, 0 }, Rotation{ 0, InitialRot, 0 }, AngularVelocity{ 0, 0, 0 }) {}
 
-HomeBot::HomeBot(float xInitial, float zInitial, float InitialRot) : Bot(xInitial, zInitial, InitialRot), actions(Actions{ 0,0,0 }) {}
+HomeBot::HomeBot(float xInitial, float zInitial, float InitialRot) :
+    Bot(xInitial, zInitial, InitialRot), actions(Actions{ 0,0,0 }), role(BotRole::NONE) {}
 
 Actions HomeBot::getBallControl() {
     return actions;
@@ -55,4 +56,12 @@ void HomeBot::setBallControl(float dribblerValue, float kickValue, float chirpVa
     actions.dribbler = dribblerValue;
     actions.kicker = kickValue;
     actions.chipper = chirpValue;
+}
+
+BotRole HomeBot::getRole() {
+    return role;
+}
+
+void HomeBot::setRole(BotRole newRole) {
+    role = newRole;
 }
