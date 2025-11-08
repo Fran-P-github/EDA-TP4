@@ -13,3 +13,5 @@
 #define centreY 0.0F
 
 #define DEFENDER_CIRCLE_RADIUS 42
+
+#define EPSILON 1

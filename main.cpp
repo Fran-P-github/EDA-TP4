@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
                 case PLAYING:
                     if (mustReply)
                         {
-                            Coords currentPos = game.homeBot1.getPosition();
+                            /*Coords currentPos = game.homeBot1.getPosition();
                             Coords currentPos2 = game.homeBot2.getPosition();
 
                             float angle = getAngle(currentPos, currentPos2);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
 
                             game.homeBot1.setRotation({ newRot.rotX, angle, newRot.rotZ });
                             game.homeBot2.setPosition({ currentPos2.x + .1f, currentPos2.y, currentPos2.z });
-                            
+                            */
                             //comm.poseHomeBots(game.homeBot1, game.homeBot2);
                         }
                     break;
