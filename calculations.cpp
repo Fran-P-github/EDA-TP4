@@ -43,3 +43,8 @@ float defenderXCord(Coords position, Coords ball) {
 	return defenderX;
 }
 
+float getDistance(Coords origin, Coords destiny) {
+	float dX = destiny.x - origin.x;
+	float dY = destiny.y - origin.y;
+	return sqrt(dX * dX + dY * dY);
+}
