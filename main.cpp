@@ -33,12 +33,16 @@ int main(int argc, char *argv[])
                 case PLAYING:
                     if (mustReply)
                         {
-                            /*Coords currentPos = homeBot1->getPosition();
-                            Coords currentPos2 = homeBot2->getPosition();
-                            float angle = getAngle(currentPos, homeBot2->getPosition());
-                            homeBot1->setPosition(currentPos.x, currentPos.z, angle);
-                            homeBot2->setPosition(currentPos2.x + .1f, currentPos2.z, 0.0f);
-                            poseHomeBots(homeBot1, homeBot2);*/
+                            Coords currentPos = game.homeBot1.getPosition();
+                            Coords currentPos2 = game.homeBot2.getPosition();
+
+                            float angle = getAngle(currentPos, currentPos2);
+                            Rotation newRot = game.homeBot1.getRotation();
+
+                            game.homeBot1.setRotation({ newRot.rotX, angle, newRot.rotZ });
+                            game.homeBot2.setPosition({ currentPos2.x + .1f, currentPos2.y, currentPos2.z });
+                            
+                            comm.poseHomeBots(game.homeBot1, game.homeBot2);
                         }
                     break;
                 case STOPPED:

@@ -16,29 +16,29 @@ AngularVelocity Entity::getAV() {
     return av;
 }
 
-void Entity::setPosition(Coords newCoords) {
-    coords.x = newCoords.x;
-    coords.y = newCoords.y;
-    coords.z = newCoords.z;
-}
-
-void Entity::setVelocity(Velocity newVelocity) {
-    velocity.vx = newVelocity.vx;
-    velocity.vy = newVelocity.vy;
-    velocity.vz = newVelocity.vz;
-}
-
-void Entity::setRotation(Rotation newRotation) {
-    rotation.rotX = newRotation.rotX;
-    rotation.rotY = newRotation.rotY;
-    rotation.rotZ = newRotation.rotZ;
-}
-
-void Entity::setAV(AngularVelocity newAV) {
-    av.avX = newAV.avX;
-    av.avY = newAV.avY;
-    av.avZ = newAV.avZ;
-}
+//void Entity::setPosition(Coords newCoords) {
+//    coords.x = newCoords.x;
+//    coords.y = newCoords.y;
+//    coords.z = newCoords.z;
+//}
+//
+//void Entity::setVelocity(Velocity newVelocity) {
+//    velocity.vx = newVelocity.vx;
+//    velocity.vy = newVelocity.vy;
+//    velocity.vz = newVelocity.vz;
+//}
+//
+//void Entity::setRotation(Rotation newRotation) {
+//    rotation.rotX = newRotation.rotX;
+//    rotation.rotY = newRotation.rotY;
+//    rotation.rotZ = newRotation.rotZ;
+//}
+//
+//void Entity::setAV(AngularVelocity newAV) {
+//    av.avX = newAV.avX;
+//    av.avY = newAV.avY;
+//    av.avZ = newAV.avZ;
+//}
 
 Ball::Ball() : Entity(Coords{ 0, 0, 0 }, Velocity{ 0, 0, 0 }, Rotation{ 0, 0, 0 }, AngularVelocity{ 0, 0, 0 }) {}
 

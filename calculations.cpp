@@ -1,33 +1,14 @@
 #include "calculations.h"
 #include <cmath>
+#include <iostream>
 
 float getAngle(Coords origin, Coords destiny) {
-	
-	float dX = ABS(destiny.x - origin.x), dY = ABS(destiny.y - origin.y);
-	
-	// Avoid division by zero.
-	if (!dX) {
-		if (dY >= 0) {
-			return PI / 2;
-		}
-		else return 3 * PI / 2;
-	}
+	float dx = destiny.z - origin.z; // Tomando el tablero como un plano con el eje X horizontal
+	float dy = destiny.x - origin.x; // y el eje Y vertical.
 
-	float angleVal = atan(dY / dX);
-	float result;
-	if (destiny.y >= origin.y && destiny.x >= origin.x) {
-		result = angleVal;
-	}
-	else if (destiny.y >= origin.y && destiny.x <= origin.x) {
-		result = PI - angleVal;
-	}
-	else if (destiny.y <= origin.y && destiny.x <= origin.x) {
-		result = PI + angleVal;
-	}
-	else {
-		result = 2 * PI - angleVal;
-	}
-	return result;
+	float angle = atan2(dy, dx) + PI;
+
+	return angle;
 }
 
 int proximityCheck(Coords origin, Coords destiny, float threshold) {
