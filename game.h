@@ -40,9 +40,9 @@ public:
     Rotation getRotation();
     AngularVelocity getAV();
     void setPosition(Coords newCoords) { this->coords = newCoords; }
-    void setVelocity(Velocity newVelocity) { this->velocity = newVelocity; }
-    void setRotation(Rotation newRoation) { this->rotation = newRoation; }
-    void setAV(AngularVelocity newAV) { this->av = newAV; }
+    void setVelocity(Velocity newVelocity);
+    void setRotation(Rotation newRoation);
+    void setAV(AngularVelocity newAV);
 protected:
     Coords coords;
     Velocity velocity;
