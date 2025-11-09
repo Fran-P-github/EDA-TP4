@@ -4,9 +4,6 @@
 #include "config.h"
 
 
-
-float xMin = -FIELD_WIDTH/2, xMax = FIELD_WIDTH/2, yMin = -FIELD_LENGTH/2, yMax = FIELD_LENGTH/2;
-
 float getAngle(Coords origin, Coords destiny) {
 	float dx = destiny.z - origin.z; // Tomando el tablero como un plano con el eje X horizontal
 	float dy = destiny.x - origin.x; // y el eje Y vertical.
@@ -29,7 +26,7 @@ int proximityCheck(Coords origin, Coords destiny, float threshold) {
 }
 
 int offLimitsCheck(Coords position) {
-	if (position.x < xMin || position.x > xMax || position.y < yMin || position.y > yMax || ABS(position.z) > maxHeight) {
+	if (position.x < X_MIN || position.x > X_MAX || position.y < Y_MIN || position.y > Y_MAX || ABS(position.z) > MAX_HEIGHT) {
 		return 1;
 	}
 	else {
@@ -39,7 +36,7 @@ int offLimitsCheck(Coords position) {
 
 float defenderXCord(Coords position, Coords ball) {
 	float defenderX;
-	defenderX = (centreX + ball.x) / 2.0F;
+	defenderX = (CENTER_X + ball.x) / 2.0F;
 	return defenderX;
 }
 

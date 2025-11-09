@@ -8,9 +8,14 @@
 #define AREA_LENGTH (25.0F/100)
 #define AREA_WIDTH (80.0F/100)
 
-#define maxHeight (0.75F/100)
-#define centreX 0.0F
-#define centreY 0.0F
+#define X_MIN (-FIELD_WIDTH/2)
+#define X_MAX (FIELD_WIDTH/2)
+#define Y_MIN (-FIELD_LENGTH/2)
+#define Y_MAX (FIELD_LENGTH/2)
+
+#define MAX_HEIGHT (0.75F/100)
+#define CENTER_X 0.0F
+#define CENTER_Y 0.0F
 
 #define DEFENDER_CIRCLE_RADIUS (42.0F/100)
 
