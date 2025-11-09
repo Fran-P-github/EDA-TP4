@@ -33,3 +33,7 @@ la ruta de este
 3. Abre un navegador y accede a https://www.openreality.app/ para visualizar la simulación.
 
 4. Para reanudar el juego, usa el comando "p" en la terminal simulador. Puedes detener el juego con el comando "s", y reiniciar los robots con el comando "r".
+
+## Comentarios nuestros
+
+Una funcionalidad que implementamos es el concepto de un robot defensor y uno atacante. Cada uno cumple el rol designado, en el caso del defensor se mantienen cerca del area defendiendo el arco, y el atacante es quien busca la pelota para marcar goles. Si el defensor es sacado de la cancha, el atacante toma su lugar, hasta volver. Los robots tratan de evitar las faltas, como dejar de seguir la pelota si sale de los limites de la cancha o si entra al area.
