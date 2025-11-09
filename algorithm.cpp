@@ -10,10 +10,10 @@ static HomeBotPlan computeAttackerPlan(GameState &game, HomeBot &attacker, HomeB
 
 static HomeBotPlan computeDefenderPlan(GameState &game, HomeBot &attacker, HomeBot &defender);
 
-static void assignRoles(GameState &game);
+static void assignRoles(HomeBot &attacker, HomeBot &defender);
 
 void algorithmInit(GameState &game) {
-	assignRoles(game);
+	assignRoles(game.homeBot1, game.homeBot2);
 }
 
 TeamPlan computeTeamPlan(GameState &game) {
@@ -23,8 +23,7 @@ TeamPlan computeTeamPlan(GameState &game) {
 		Coords attackerPos = game.homeBot1.getPosition();
 		// Revisamos si el defensor esta fuera de juego, en ese caso el atacante (bot1) pasa a defender.
 		if (defenderPos.y < MAX_HEIGHT) {
-			game.homeBot2.setRole(BotRole::ATTACKER);
-			game.homeBot1.setRole(BotRole::DEFENDER);
+			assignRoles(game.homeBot2, game.homeBot1);
 			attackerPlaying = false;
 			HomeBotPlan planAFK = { .posXZ = {defenderPos.x, defenderPos.z} };
 			plan.hb1Plan = computeDefenderPlan(game, game.homeBot2, game.homeBot1);
@@ -46,8 +45,7 @@ TeamPlan computeTeamPlan(GameState &game) {
 		Coords attackerPos = game.homeBot2.getPosition();
 		// Revisamos si el defensor esta fuera de juego, en ese caso el atacante (bot1) pasa a defender.
 		if (defenderPos.y < MAX_HEIGHT) {
-			game.homeBot1.setRole(BotRole::ATTACKER);
-			game.homeBot2.setRole(BotRole::DEFENDER);
+			assignRoles(game.homeBot1, game.homeBot2);
 			attackerPlaying = false;
 			HomeBotPlan planAFK = { .posXZ = {defenderPos.x, defenderPos.z} };
 			plan.hb2Plan = computeDefenderPlan(game, game.homeBot1, game.homeBot2);
@@ -114,7 +112,7 @@ static HomeBotPlan computeAttackerPlan(GameState &game, HomeBot &attacker, HomeB
 	return plan;
 }
 
-static void assignRoles(GameState &game) {
-	game.homeBot1.setRole(BotRole::ATTACKER);
-	game.homeBot2.setRole(BotRole::DEFENDER);
+static void assignRoles(HomeBot &attacker, HomeBot &defender) {
+	defender.setRole(BotRole::DEFENDER);
+	attacker.setRole(BotRole::ATTACKER);
 }
