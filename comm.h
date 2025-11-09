@@ -4,8 +4,7 @@
 
 class Comm {
 public: 
-	void poseHomeBots(HomeBot &homeBot1, HomeBot &homeBot2);
 	bool updateGame(GameState &game);
 private: 
-
+	void poseHomeBots(HomeBotPlan &homeBot1, HomeBotPlan &homeBot2);
 };
