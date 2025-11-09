@@ -42,7 +42,7 @@ static HomeBotPlan computeDefenderPlan(GameState &game, HomeBot &attacker, HomeB
 		float theta = getAngle(goalCenter, ballPos) - PI;
 		plan.posXZ.x = DEFENDER_CIRCLE_RADIUS * sin(theta) + goalCenter.x;
 		plan.posXZ.z = DEFENDER_CIRCLE_RADIUS * cos(theta) + goalCenter.z;
-		std::cerr << "theta: " << theta << "\n";
+		//std::cerr << "theta: " << theta << "\n";
 	}
 	return plan;
 }
@@ -51,9 +51,27 @@ static HomeBotPlan computeAttackerPlan(GameState &game, HomeBot &attacker, HomeB
 	HomeBotPlan plan = {};
 	Coords ballPos = game.ball.getPosition();
 	Coords attackerPos = attacker.getPosition();
+	Coords goalCenter = { (FIELD_LENGTH / 2) , 0, 0 };
 	plan.rotY = getAngle(attackerPos, ballPos);
-	plan.posXZ.x = attackerPos.x;
-	plan.posXZ.z = attackerPos.z;
+	if (attackerPos.x > ballPos.x) { // si el atacante esta detras de la pelota
+		float theta = getAngle(ballPos, goalCenter) - PI;
+		plan.posXZ.x = -DEFENDER_CIRCLE_RADIUS * sin(theta) + ballPos.x;
+		plan.posXZ.z = -DEFENDER_CIRCLE_RADIUS * cos(theta) + ballPos.z;
+	}
+	else if (attackerPos.x < ballPos.x && getDistance(attacker.getPosition(), ballPos) < EPSILON / 1.2) { // si el atacante tiene la pelota
+		plan.actions.dribbler = 1;
+		plan.rotY = getAngle(attackerPos, goalCenter);
+		plan.posXZ.x = goalCenter.x - 0.05;
+		plan.posXZ.z = goalCenter.z;
+	}
+	else if (attackerPos.x < ballPos.x) { // si el atacante esta delante de la pelota
+		plan.posXZ.x = ballPos.x;
+		plan.posXZ.z = ballPos.z;
+	}
+	else {
+		plan.posXZ.x = attackerPos.x;
+		plan.posXZ.z = attackerPos.z;
+	}
 	return plan;
 }
 
