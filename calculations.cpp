@@ -30,10 +30,10 @@ int proximityCheck(Coords origin, Coords destiny, float threshold) {
 }
 
 int offLimitsCheck(Coords position) {
-	if (position.z < X_MIN || position.z > X_MAX || position.x < Y_MIN || position.x > Y_MAX || ABS(position.y) > MAX_HEIGHT) {
+	if (position.z < X_MIN || position.z > X_MAX || position.x < Y_MIN || position.x > Y_MAX) {
 		return 1;
 	}
-	else if((position.x <= Y_MIN + GOAL_LENGTH || position.x >= Y_MAX - GOAL_LENGTH) && ABS(position.z) <= GOAL_WIDTH/2) {
+	else if((position.x <= Y_MIN + AREA_LENGTH || position.x >= Y_MAX - AREA_LENGTH) && ABS(position.z) <= AREA_WIDTH/2) {
 		return 1;
 	}
 	else {

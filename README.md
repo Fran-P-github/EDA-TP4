@@ -1,26 +1,19 @@
 # Simulación de robots EDACup 2025
 
-## Compilar un proyecto de ejemplo
+## Integrantes del Grupo
 
-1. Abre el proyecto `move_sample` (ubicado en la carpeta `move_sample`) en tu entorno de desarrollo.
+- Francisco Paredes Alonso
+- Santiago Resnik
+- Juan Ignacio Fogolin Lagares
+- Rocco Diaz Parisi
 
-2. Compila el proyecto.
+## Compilacion del codigo
 
-3. Verifica la ubicación del binario generado (en Windows, suele estar en `build\debug\move_sample.exe`).
+Cuando se compila el codigo, se genera un archivo ejecutable "move_example.exe" dentro del directorio ".\\out\\build\\x64-Debug"
+la ruta de este 
 
 ## Instalar el simulador
 
-1. Descarga e instala Node.js:
-
-  * Visita https://nodejs.org/ y sigue las instruacciones para instalar Node.js.
-
-2. Instala las dependencias:
-
- * Abre una terminal y navega a la carpeta que contiene el archivo `README.md`.
- * Ejecuta los siguientes comandos para instalar los paquetes necesarios:
-
-        npm install ws
-        npm install "@roamhq/wrtc"
 
 3. Configura el archivo de configuración:
 
