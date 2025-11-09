@@ -3,6 +3,10 @@
 #include <iostream>
 #include "config.h"
 
+// El de toda la vida -> el que se usa
+// x -> z
+// y -> x
+// z -> y
 
 float getAngle(Coords origin, Coords destiny) {
 	float dx = destiny.z - origin.z; // Tomando el tablero como un plano con el eje X horizontal
@@ -26,7 +30,10 @@ int proximityCheck(Coords origin, Coords destiny, float threshold) {
 }
 
 int offLimitsCheck(Coords position) {
-	if (position.x < X_MIN || position.x > X_MAX || position.y < Y_MIN || position.y > Y_MAX || ABS(position.z) > MAX_HEIGHT) {
+	if (position.z < X_MIN || position.z > X_MAX || position.x < Y_MIN || position.x > Y_MAX || ABS(position.y) > MAX_HEIGHT) {
+		return 1;
+	}
+	else if((position.x <= Y_MIN + GOAL_LENGTH || position.x >= Y_MAX - GOAL_LENGTH) && ABS(position.z) <= GOAL_WIDTH/2) {
 		return 1;
 	}
 	else {
@@ -34,11 +41,6 @@ int offLimitsCheck(Coords position) {
 	}
 }
 
-float defenderXCord(Coords position, Coords ball) {
-	float defenderX;
-	defenderX = (CENTER_X + ball.x) / 2.0F;
-	return defenderX;
-}
 
 float getDistance(Coords origin, Coords destiny) {
 	float dX = destiny.x - origin.x;
