@@ -33,7 +33,7 @@ void Comm::poseHomeBots(HomeBotPlan &hb1Plan, HomeBotPlan &hb2Plan)
 
     cout << sampleMessage.dump() << endl;
 
-    cerr << sampleMessage.dump(4) << endl;
+    //cerr << sampleMessage.dump(4) << endl;
 }
 
 bool Comm::updateGame(GameState &game) {
@@ -147,6 +147,8 @@ bool Comm::updateGame(GameState &game) {
         HomeBotPlan hb2Plan = plan.hb2Plan;
         poseHomeBots(hb1Plan, hb2Plan);
         mustReply = true;
+        //cerr << "Hb1: (x,z,rotY) = (" << hb1Plan.posXZ.x << ", " << hb1Plan.posXZ.z << ", " << hb1Plan.rotY << ")\n";
+        //cerr << "Hb2: (x,z,rotY) = (" << hb2Plan.posXZ.x << ", " << hb2Plan.posXZ.z << ", " << hb2Plan.rotY << ")\n";
     }
     return mustReply;
 }

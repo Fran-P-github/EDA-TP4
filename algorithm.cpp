@@ -2,7 +2,7 @@
 #include "calculations.h"
 #include "config.h"
 #include <cmath>
-
+#include <iostream>
 static HomeBotPlan computeAttackerPlan(GameState &game, HomeBot &attacker, HomeBot &defender);
 
 static HomeBotPlan computeDefenderPlan(GameState &game, HomeBot &attacker, HomeBot &defender);
@@ -30,17 +30,19 @@ static HomeBotPlan computeDefenderPlan(GameState &game, HomeBot &attacker, HomeB
 	HomeBotPlan plan = {};
 	Coords ballPos = game.ball.getPosition();
 	Coords defenderPos = defender.getPosition();
-	Coords goalCenter = { -1 * (FIELD_LENGTH / 2 - DEFENDER_CIRCLE_RADIUS) , 0, 0 };
+	Coords goalCenter = { -1 * (FIELD_LENGTH/2) , 0, 0 };
 	plan.rotY = getAngle(defenderPos, ballPos);
+//	std::cerr << "BallPos: " << ballPos.x << "\nDist: " << getDistance(attacker.getPosition(), ballPos) << "\n\n";
 	if (ballPos.x > 0 && getDistance(attacker.getPosition(), ballPos) <= EPSILON) { 
 		// si nuestro atacante tiene la pelota y esta del lado opuesto de la cancha
 		plan.posXZ.z = goalCenter.z;
-		plan.posXZ.x = goalCenter.x;
+		plan.posXZ.x = goalCenter.x + DEFENDER_CIRCLE_RADIUS;
 	}
 	else {
-		float theta = getAngle(goalCenter, ballPos);
-		plan.posXZ.x = DEFENDER_CIRCLE_RADIUS * cos(theta) + goalCenter.x;
-		plan.posXZ.z = DEFENDER_CIRCLE_RADIUS * sin(theta) + goalCenter.z;
+		float theta = getAngle(goalCenter, ballPos) - PI;
+		plan.posXZ.x = DEFENDER_CIRCLE_RADIUS * sin(theta) + goalCenter.x;
+		plan.posXZ.z = DEFENDER_CIRCLE_RADIUS * cos(theta) + goalCenter.z;
+		std::cerr << "theta: " << theta << "\n";
 	}
 	return plan;
 }

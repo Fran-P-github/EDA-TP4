@@ -4,7 +4,7 @@
 #include "game.h"
 #include "calculations.h"
 #include "comm.h"
-
+#include "algorithm.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
         .status = STOPPED,
         .time = 0,
     };
-
+    algorithmInit(game);
     Comm comm;
 
     while (true)
