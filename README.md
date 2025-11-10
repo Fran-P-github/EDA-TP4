@@ -11,8 +11,8 @@
 
 ## Compilacion del codigo
 
-Se debe utilizar "node ./edacup.mjs" para ejecutralo. 
-Cuando se compila el codigo, se genera un archivo ejecutable "move_example.exe" dentro del directorio ".\\out\\build\\x64-Debug", la ruta de este. 
+Se debe utilizar "node ./edacup.mjs" para ejecutarlo. 
+Cuando se compila el codigo, se genera un archivo ejecutable "move_example.exe" dentro del directorio ".\\out\\build\\x64-Debug".
 
 ## Comentarios sobre la funcionalidad del codigo
 
@@ -37,7 +37,7 @@ El código implementa un sistema de control para dos robots en un juego de fútb
    - Calcula ángulos óptimos de aproximación hacia el arco rival
 
 ### Sistema de Recuperación
-- Si el defensor es penalizado (fuera de juego), el atacante asume temporalmente el rol defensivo
+- Si el defensor es penalizado (fuera de juego), el atacante asume el rol defensivo
 - El sistema mantiene la posición del robot penalizado en modo AFK hasta su retorno
 - Se implementa un sistema de verificación de altura (`MAX_HEIGHT`) para detectar robots fuera de juego
 
