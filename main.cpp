@@ -1,3 +1,10 @@
+/**
+ * @file main.cpp
+ * @brief Punto de entrada: inicializa el estado del juego, el algoritmo y entra en el bucle principal.
+ *
+ * Documentado en español para Doxygen.
+ */
+
 #include <exception>
 #include <iostream>
 #include <string>
@@ -7,6 +14,9 @@
 #include "algorithm.h"
 using namespace std;
 
+/**
+ * @brief Función principal que inicializa GameState, inicializa el algoritmo y procesa mensajes.
+ */
 int main(int argc, char *argv[])
 {
     GameState game = {
@@ -27,34 +37,7 @@ int main(int argc, char *argv[])
     {
         try
         {
-            bool mustReply = comm.updateGame(game);
-            switch(game.status)
-            {
-                case PLAYING:
-                    if (mustReply)
-                        {
-                            /*Coords currentPos = game.homeBot1.getPosition();
-                            Coords currentPos2 = game.homeBot2.getPosition();
-
-                            float angle = getAngle(currentPos, currentPos2);
-                            Rotation newRot = game.homeBot1.getRotation();
-
-                            game.homeBot1.setRotation({ newRot.rotX, angle, newRot.rotZ });
-                            game.homeBot2.setPosition({ currentPos2.x + .1f, currentPos2.y, currentPos2.z });
-                            */
-                            //comm.poseHomeBots(game.homeBot1, game.homeBot2);
-                        }
-                    break;
-                case STOPPED:
-                    break;
-                case FOUL:
-                    break;
-                case RESET:
-                    break;
-                default:
-                    break;
-            }
-            
+            comm.updateGame(game);
         }
         catch (exception &error)
         {

@@ -81,36 +81,64 @@ static HomeBotPlan computeDefenderPlan(GameState &game, HomeBot &attacker, HomeB
 		plan.posXZ.x = DEFENDER_CIRCLE_RADIUS * sin(theta) + goalCenter.x;
 		plan.posXZ.z = DEFENDER_CIRCLE_RADIUS * cos(theta) + goalCenter.z;
 	}
-	if (getDistance(defenderPos, ballPos) <= EPSILON) {
-		plan.actions.kicker = 1;
-	}
+	plan.actions.kicker = 1;
 	return plan;
 }
 
 static HomeBotPlan computeAttackerPlan(GameState &game, HomeBot &attacker, HomeBot &deffender) {
-	HomeBotPlan plan = {};
 	Coords attackerPos = attacker.getPosition();
+	HomeBotPlan plan = { .posXZ = {attackerPos.x, attackerPos.z} };
 	Coords ballPos = game.ball.getPosition();
 	Coords rivalGoalCenter = { (FIELD_LENGTH / 2) , 0, 0 };
 	plan.rotY = getAngle(attackerPos, ballPos);
-	if (attackerPos.x > ballPos.x) { // si el atacante esta detras de la pelota
-		float theta = getAngle(ballPos, rivalGoalCenter) - PI;	
+	// Si el atacante esta detras de la pelota
+	float theta = getAngle(ballPos, rivalGoalCenter) - PI;
+	if (attackerPos.x >= ballPos.x) { 
+		Coords destination = { 
+			-ATTACKER_BALL_DISTANCE * sin(theta) + ballPos.x ,
+			attackerPos.y, 
+			-ATTACKER_BALL_DISTANCE * cos(theta) + ballPos.z 
+		};
+
+		// Si el destino esta fuera del campo de juego el robot se dirige hasta la posicion limite.
+		if(offLimitsCheck(destination)) {
+			// Se revisa el limite en la coordenada x.
+			if (destination.x < Y_MIN + AREA_LENGTH) {
+				destination.x = Y_MIN + AREA_LENGTH + EPSILON;
+			}
+			else if (destination.x > Y_MAX) {
+				destination.x = Y_MAX - EPSILON;
+			}
+			// Se revisa el limite en la coordenada z.
+			if (destination.z < X_MIN) {
+				destination.z = X_MIN + EPSILON;
+			}
+			else if (destination.z > X_MAX) {
+				destination.z = X_MAX - EPSILON;
+			}
+		}
+
+		plan.posXZ.x = destination.x;
+		plan.posXZ.z = destination.z;
+	}
+	// Si el atacante esta delante de la pelota y esta se encuentra dentro de la cancha.
+	else if (!offLimitsCheck(ballPos) && attackerPos.x < ballPos.x) { 
+		float attackerRot = attacker.getRotation().rotY + PI;
 		plan.posXZ.x = -ATTACKER_SHOOT_DISTANCE * sin(theta) + ballPos.x;
 		plan.posXZ.z = -ATTACKER_SHOOT_DISTANCE * cos(theta) + ballPos.z;
-	}
-	else if (attackerPos.x < ballPos.x && getDistance(attackerPos, ballPos) < EPSILON / 1.2) { // si el atacante tiene la pelota
-		plan.actions.dribbler = 1;
-		plan.rotY = getAngle(attackerPos, rivalGoalCenter);	
-		plan.posXZ.x = rivalGoalCenter.x - AREA_LENGTH;
-		plan.posXZ.z = rivalGoalCenter.z;
-	}
-	else if (!offLimitsCheck(ballPos) && attackerPos.x < ballPos.x) { // si el atacante esta delante de la pelota
-		plan.posXZ.x = ballPos.x;
-		plan.posXZ.z = ballPos.z;
-	}
-	else {
-		plan.posXZ.x = attackerPos.x;
-		plan.posXZ.z = attackerPos.z;
+		float bestAngle = getAngle(attackerPos, rivalGoalCenter);
+		bool shouldKick = attackerRot <= bestAngle-PI + ANGLE_EPSILON && attackerRot >= bestAngle-PI - ANGLE_EPSILON;
+		if (getDistance(attackerPos, ballPos) < EPSILON && !shouldKick) {
+			plan.actions.dribbler = 1;
+			plan.actions.kicker = 0;
+		}
+		if (shouldKick) {
+			plan.actions.dribbler = 0;
+			plan.actions.kicker = 1;
+		}
+		else {
+			plan.rotY = bestAngle;
+		}
 	}
 	return plan;
 }

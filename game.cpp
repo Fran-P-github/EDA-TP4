@@ -1,3 +1,10 @@
+/**
+ * @file game.cpp
+ * @brief Implementación de constructores y getters/setters de entidades.
+ *
+ * Documentado en español para Doxygen.
+ */
+
 #include "game.h"
 
 Entity::Entity(Coords initCoords, Velocity initVelocity, Rotation initRot, AngularVelocity initAV)
