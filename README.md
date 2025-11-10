@@ -12,8 +12,7 @@
 Cuando se compila el codigo, se genera un archivo ejecutable "move_example.exe" dentro del directorio ".\\out\\build\\x64-Debug"
 la ruta de este 
 
-## Instalar el simulador
-
+## Configuracion
 
 3. Configura el archivo de configuración:
 
@@ -22,18 +21,6 @@ la ruta de este
   * Establece el campo `team1Binary` con la ruta al binario generado en el paso anterior.
   * (Opcional) Configura `team2Binary` con la misma ruta si deseas controlar ambos equipos con el binario de ejemplo.
 
-## Ejecutar el simulador
+## Comentarios sobre la funcionalidad del codigo
 
-1. En la línea de comandos, navega a la carpeta que contiene el archivo `README.md`.
-
-2. Inicia el simulador con el siguiente comando:
-
-    node edacup/edacup.mjs
-
-3. Abre un navegador y accede a https://www.openreality.app/ para visualizar la simulación.
-
-4. Para reanudar el juego, usa el comando "p" en la terminal simulador. Puedes detener el juego con el comando "s", y reiniciar los robots con el comando "r".
-
-## Comentarios nuestros
-
-Una funcionalidad que implementamos es el concepto de un robot defensor y uno atacante. Cada uno cumple el rol designado, en el caso del defensor se mantienen cerca del area defendiendo el arco, y el atacante es quien busca la pelota para marcar goles. Si el defensor es sacado de la cancha, el atacante toma su lugar, hasta volver. Los robots tratan de evitar las faltas, como dejar de seguir la pelota si sale de los limites de la cancha o si entra al area.
+Una implementación necesaria fue la asignación de un rol a cada robot, los cuales pueden ser defensor o atacante. Cada uno cumple el rol designado, en el caso del defensor se mantienen cerca del area recorriendo una trayectoria circular para bloquear posibles disparos del contrincante, y el atacante es quien busca la pelota constantemente intentando marcar goles. Si el defensor es penalizado y queda fuera del juego, el atacante toma su lugar hasta que regrese. Los robots tratan de evitar las faltas, por ejemplo, dejando de seguir la pelota si sale de los limites de la cancha o si entra a algun area.
