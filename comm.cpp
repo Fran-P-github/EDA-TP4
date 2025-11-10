@@ -18,7 +18,7 @@ void Comm::poseHomeBots(HomeBotPlan &hb1Plan, HomeBotPlan &hb2Plan)
                  {"rotationY", hb1Plan.rotY},
                  {"dribbler", hb1Plan.actions.dribbler},
                  {"kick", hb1Plan.actions.kicker},
-                 {"chirp", hb1Plan.actions.chipper}
+                 {"chip", hb1Plan.actions.chipper}
              }},
          {   "homeBot2",
              {
@@ -26,7 +26,7 @@ void Comm::poseHomeBots(HomeBotPlan &hb1Plan, HomeBotPlan &hb2Plan)
                  {"rotationY", hb2Plan.rotY},
                  {"dribbler", hb2Plan.actions.dribbler},
                  {"kick", hb2Plan.actions.kicker},
-                 {"chirp", hb2Plan.actions.chipper }
+                 {"chip", hb2Plan.actions.chipper }
              },
          }}},
     };
