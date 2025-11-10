@@ -43,7 +43,7 @@ TeamPlan computeTeamPlan(GameState &game) {
 	else if (game.homeBot1.getRole() == BotRole::DEFENDER && game.homeBot2.getRole() == BotRole::ATTACKER) {
 		Coords defenderPos = game.homeBot1.getPosition();
 		Coords attackerPos = game.homeBot2.getPosition();
-		// Revisamos si el defensor esta fuera de juego, en ese caso el atacante (bot1) pasa a defender.
+		// Revisamos si el defensor esta fuera de juego, en ese caso el atacante (bot2) pasa a defender.
 		if (defenderPos.y < MAX_HEIGHT) {
 			assignRoles(game.homeBot1, game.homeBot2);
 			attackerPlaying = false;
